@@ -1,30 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using System.ComponentModel.DataAnnotations;
 
 namespace PetParadiseHotel.Models
 {
-    public class Customer
+    public class Customer : Person
     {
-        public Customer(int customerID, string firstName, string lastName, string address, string zipcode, string city, string email, string phone)
-        {
-            CustomerID = customerID;
-            FirstName = firstName;
-            LastName = lastName;
-            Address = address;
-            Zipcode = zipcode;
-            City = city;
-            Email = email;
-            Phone = phone;
-        }
-        public int CustomerID { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
+        [Display(Name = "Address")]
         public string Address { get; set; }
+
+        [RegularExpression(@"\d{4}")]
+        [StringLength(4)]
+        [Display(Name = "Zipcode")]
         public string Zipcode { get; set; }
+
+        [RegularExpression(@"[A-Za-zØøÅåÆæ]")]
+        [Display(Name = "City")]
+        [StringLength(50, MinimumLength = 2)]
         public string City { get; set; }
+
+        [Display(Name = "E-Mail")]
         public string Email { get; set; }
+
+        [RegularExpression(@"\d{8}")]
+        [StringLength(8)]
+        [Display(Name = "Phone")]
         public string Phone { get; set; }
+
+        public virtual ICollection<Reservation> Reservations { get; set; }
     }
 }

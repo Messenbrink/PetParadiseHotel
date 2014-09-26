@@ -11,6 +11,7 @@ namespace PetParadiseHotel.Controllers
         // GET: Reservation
         public ActionResult Index()
         {
+            //Repository repository = new Repository();
             return View();
         }
 
